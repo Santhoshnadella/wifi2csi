@@ -9,12 +9,34 @@
 
 ---
 
+### WiFi Sensing Concept
+![WiFi Sensing Concept](wifi_sensing_concept.png)
+*Conceptual visualization: The system interprets reflected RF signals (WiFi) to reconstruct a spatial understanding of the environment, effectively "seeing" human presence through obstacles.*
+
+---
+
+## 🚧 Project Status & Roadmap
+
+The project is currently in the **Alpha / Prototype** phase. Below is a detailed breakdown of the development stages:
+
+| Component | Stage | Phase | Status | details |
+| :--- | :--- | :--- | :--- | :--- |
+| **Core Architecture** | **Alpha** | `Infrastructure` | ✅ Complete | basic project structure, file modulation, and app skeleton are built. |
+| **Synthetic Pipeline** | **Beta** | `Simulation` | ✅ Live | "breathing" human simulation and synthetic CSI data generation are active for demos. |
+| **Hardware Bridge** | **Alpha** | `Hardware` | ⚠️ Testing | Serial communication logic is written; requires physical ESP32 device calibration. |
+| **Neural Network** | **Pre-Alpha** | `Deep Learning` | 🚧 In Progress | Transformer architecture is defined in code (`model.py`), but weights are untrained. |
+| **Visualization UI** | **Beta** | `Frontend` | ✅ Stable | Real-time 3D Plotly rendering and Webcam overlay are fully functional. |
+| **Real-Time Data** | **Planner** | `Integration` | 🛑 Pending | End-to-end pipeline from hardware to model inference is not yet verified with real signals. |
+
+> **Current Focus**: Moving from *Synthetic Data* to *Real-World CSI Data* collection to train the model.
+
+---
+
 ## 📖 Table of Contents
 - [Project Overview](#-project-overview)
 - [Why WiFi Sensing?](#-why-wifi-sensing)
 - [System Architecture](#-system-architecture)
 - [How It Works](#-how-it-works)
-- [Project Status & Roadmap](#-project-status--roadmap)
 - [Installation & Setup](#-installation--setup)
 - [Usage](#-usage)
 
@@ -92,28 +114,47 @@ graph LR
 
 ---
 
-## 🚧 Project Status & Roadmap
+## 💻 Installation & Setup
 
-The project is currently in the **Alpha / Prototype** phase. Below is a detailed breakdown of the development stages:
+### Prerequisites
+- Python 3.8+
+- [Optional] CUDA-capable GPU for faster inference.
 
-| Component | Stage | Phase | Status | details |
-| :--- | :--- | :--- | :--- | :--- |
-| **Core Architecture** | **Alpha** | `Infrastructure` | ✅ Complete | Basic project structure, file modulation, and app skeleton are built. |
-| **Synthetic Pipeline** | **Beta** | `Simulation` | ✅ Live | "breathing" human simulation and synthetic CSI data generation are active for demos. |
-| **Hardware Bridge** | **Alpha** | `Hardware` | ⚠️ Testing | Serial communication logic is written; requires physical ESP32 device calibration. |
-| **Neural Network** | **Pre-Alpha** | `Deep Learning` | 🚧 In Progress | Transformer architecture is defined in code (`model.py`), but weights are untrained. |
-| **Visualization UI** | **Beta** | `Frontend` | ✅ Stable | Real-time 3D Plotly rendering and Webcam overlay are fully functional. |
-| **Real-Time Data** | **Planner** | `Integration` | 🛑 Pending | End-to-end pipeline from hardware to model inference is not yet verified with real signals. |
+### 1. Clone the Repository
+```bash
+git clone https://github.com/Santhoshnadella/wifi2csi.git
+cd wifi2csi
+```
 
-> **Current Focus**: Moving from *Synthetic Data* to *Real-World CSI Data* collection to train the model.
+### 2. Install Dependencies
+```bash
+pip install -r requirements.txt
+```
+
+### 3. Run the Application
+```bash
+streamlit run app.py
+```
 
 ---
 
-## 📸 Gallery
+## 🕹 Usage
 
-![WiFi Sensing Concept](wifi_sensing_concept.png)
+### Dashboard Controls
+- **Sidebar**: Toggle between "Live Demo (Synthetic)" and "Hardware Mode".
+- **Augmented Vision**: See the WiFi-detected points overlaid on your webcam (if enabled).
+- **3D Reconstruction**: Interact with the rotatable 3D point cloud of the detected person.
 
-*Conceptual visualization: The system interprets reflected RF signals (WiFi) to reconstruct a spatial understanding of the environment, effectively "seeing" human presence through obstacles.*
+### Connecting Hardware
+To use real data:
+1.  Flash your ESP32 with [ESP32-CSI-Tool](https://github.com/espressif/esp-csi).
+2.  Connect ESP32 via USB.
+3.  Update `COM_PORT` in `hardware_bridge.py`.
+4.  Run the bridge:
+    ```bash
+    python hardware_bridge.py
+    ```
+5.  Select "Live CSI Stream" in the Streamlit app.
 
 ---
 
