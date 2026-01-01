@@ -94,67 +94,26 @@ graph LR
 
 ## 🚧 Project Status & Roadmap
 
-**Current Phase:** `Alpha / Prototype`
+The project is currently in the **Alpha / Prototype** phase. Below is a detailed breakdown of the development stages:
 
-| Feature | Status | Notes |
-|TBD|---|---|
-| **Synthetic Data Pipeline** | ✅ Live | Generates fake CSI for instant demos. |
-| **Hardware Bridge** | ⚠️ Beta | Serial-to-UDP implemented; requires generic ESP32 firmware. |
-| **Model Inference** | 🚧 WIP | Model architecture defined; Pre-trained weights pending integration. |
-| **Visualization** | ✅ Live | 3D Plotly & Webcam Overlay working efficiently. |
+| Component | Stage | Phase | Status | details |
+| :--- | :--- | :--- | :--- | :--- |
+| **Core Architecture** | **Alpha** | `Infrastructure` | ✅ Complete | Basic project structure, file modulation, and app skeleton are built. |
+| **Synthetic Pipeline** | **Beta** | `Simulation` | ✅ Live | "breathing" human simulation and synthetic CSI data generation are active for demos. |
+| **Hardware Bridge** | **Alpha** | `Hardware` | ⚠️ Testing | Serial communication logic is written; requires physical ESP32 device calibration. |
+| **Neural Network** | **Pre-Alpha** | `Deep Learning` | 🚧 In Progress | Transformer architecture is defined in code (`model.py`), but weights are untrained. |
+| **Visualization UI** | **Beta** | `Frontend` | ✅ Stable | Real-time 3D Plotly rendering and Webcam overlay are fully functional. |
+| **Real-Time Data** | **Planner** | `Integration` | 🛑 Pending | End-to-end pipeline from hardware to model inference is not yet verified with real signals. |
 
-**Note**: The current version runs in a **"Demo Mode"** by default. It simulates CSI data and produces a procedural "breathing" human shape to demonstrate the visualization pipeline without requiring physical hardware setup.
-
----
-
-## 💻 Installation & Setup
-
-### Prerequisites
-- Python 3.8+
-- [Optional] CUDA-capable GPU for faster inference.
-
-### 1. Clone the Repository
-```bash
-git clone https://github.com/Santhoshnadella/wifi2csi.git
-cd wifi2csi
-```
-
-### 2. Install Dependencies
-```bash
-pip install -r requirements.txt
-```
-
-### 3. Run the Application
-```bash
-streamlit run app.py
-```
-
----
-
-## 🕹 Usage
-
-### Dashboard Controls
-- **Sidebar**: Toggle between "Live Demo (Synthetic)" and "Hardware Mode".
-- **Augmented Vision**: See the WiFi-detected points overlaid on your webcam (if enabled).
-- **3D Reconstruction**: Interact with the rotatable 3D point cloud of the detected person.
-
-### Connecting Hardware
-To use real data:
-1.  Flash your ESP32 with [ESP32-CSI-Tool](https://github.com/espressif/esp-csi).
-2.  Connect ESP32 via USB.
-3.  Update `COM_PORT` in `hardware_bridge.py`.
-4.  Run the bridge:
-    ```bash
-    python hardware_bridge.py
-    ```
-5.  Select "Live CSI Stream" in the Streamlit app.
+> **Current Focus**: Moving from *Synthetic Data* to *Real-World CSI Data* collection to train the model.
 
 ---
 
 ## 📸 Gallery
-*(Placeholder for future screenshots)*
-- **Left**: Real-world camera view.
-- **Right**: Neural Network reconstructed point cloud seeing through the wall.
+
+![WiFi Sensing Concept](wifi_sensing_concept.png)
+
+*Conceptual visualization: The system interprets reflected RF signals (WiFi) to reconstruct a spatial understanding of the environment, effectively "seeing" human presence through obstacles.*
 
 ---
 
